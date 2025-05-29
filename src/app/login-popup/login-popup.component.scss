@@ -1,0 +1,32 @@
+.hLogin {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  cursor: pointer;
+}
+
+.inputfield {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin:  auto;
+}
+
+.inputfield input {
+  font-size: 1.2rem;
+  height: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
+
+.buttonfield {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: auto;
+}

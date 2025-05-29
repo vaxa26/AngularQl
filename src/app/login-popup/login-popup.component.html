@@ -1,0 +1,26 @@
+<h1 class="hLogin">Login</h1>
+<div class="Login">
+  <div class="close">
+    <button mat-icon-button (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <mat-dialog-content>
+    <div class="inputfield">
+      <mat-form-field appearance="fill">
+        <input matInput placeholder="Name" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <input matInput [type]="isHidden ? 'password' : 'text'" placeholder="Passwort" />
+        <button mat-icon-button matSuffix (click)="togglePasswordVisibility()"
+          [attr.aria-label]="'Toggle password visibility'" [attr.aria-pressed]="!isHidden">
+          <mat-icon>{{ isHidden ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div class="buttonfield">
+      <button mat-raised-button color="primary" (click)="login()">Login</button>
+    </div>
+  </mat-dialog-content>
+</div>

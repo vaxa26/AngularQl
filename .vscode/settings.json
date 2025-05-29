@@ -1,0 +1,32 @@
+{
+  "files.eol": "\n",
+  "files.associations": {
+    "*.csv": "csv (semicolon)"
+  },
+  "material-icon-theme.activeIconPack": "nest",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "eslint.useFlatConfig": true,
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#034775",
+    "activityBar.background": "#034775",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#e7e7e799",
+    "activityBarBadge.background": "#034775",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "commandCenter.border": "#e7e7e799",
+    "sash.hoverBorder": "#034775",
+    "statusBar.background": "#034775",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#034775",
+    "statusBarItem.remoteBackground": "#034775",
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "titleBar.activeBackground": "#034775",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#034775",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
+  "peacock.color": "#215732",
+  "postman.telemetry.enabled": false,
+  "postman.account.region": "EU",
+  "asciidoc.antora.showEnableAntoraPrompt": false
+}

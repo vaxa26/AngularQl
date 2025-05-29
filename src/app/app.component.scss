@@ -1,0 +1,82 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  position: relative;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 1rem 2rem;
+
+.User {
+    background: none;
+    border: none;
+    cursor: pointer;
+    top:10px;
+    r: 5px;
+}
+
+.HKA_White {
+  width: 50%;         
+  display: block;     
+  margin: auto;
+  }
+  .menu-icon {
+    font-size: 2rem;
+    cursor: pointer;
+  }
+}
+
+
+.search-box {
+  background-color: #e0e0e0;
+  border-radius: 2rem;
+  padding: 2rem;
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  .search-field {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
+
+    .icon {
+      margin-right: 0.5rem;
+      color: gray;
+    }
+
+    input {
+      border: none;
+      outline: none;
+      flex: 1;
+      font-size: 1rem;
+      background: none;
+    }
+  }
+}
+
+.footer {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+
+  .icons {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 1.2rem;
+
+    span {
+      cursor: pointer;
+    }
+  }
+}
