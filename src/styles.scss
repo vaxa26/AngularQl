@@ -1,4 +1,4 @@
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 
 body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -6,25 +6,14 @@ body {
   padding: 40px;
   height: 100%;
 
-  @include mat.theme((
-    color: (
-      theme-type: light,
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
-    ),
-    density: 0,
-  ));
-}
-
-mat-slider {
-  width: 300px;
-}
-
-.stars mat-icon {
-  cursor: pointer;
-  font-size: 30px;
-  color: gold;
-}
-.rating .selected {
-  color: gold;
+  @include mat.theme(
+    (
+      color: (
+        theme-type: light,
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      density: 0,
+    )
+  );
 }

@@ -1,0 +1,18 @@
+<div class="search-box">
+  <div class="search-field">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="text" [(ngModel)]="searchInput" (keyup.enter)="search()" placeholder="Search ISBN or Titel" />
+  </div>
+  <div class="rating">
+    <mat-icon *ngFor="let i of [1,2,3,4,5]" (click)="minRating = i" [class.selected]="i <= minRating">
+      {{ i <= minRating ? 'star' : 'star_border' }} </mat-icon>
+  </div>
+  <mat-form-field>
+    <mat-label>Buch Art</mat-label>
+    <mat-select>
+      @for (art of arts; track art) {
+      <mat-option [value]="art.value">{{art.viewValue}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</div>
