@@ -1,1 +1,6 @@
-<p>KYS!</p>
+<ul>
+  <li *ngFor="let buch of buecher">
+    <strong>{{ buch.titel?.titel }}</strong> von {{ buch.autor }}<br />
+    ISBN: {{ buch.isbn }} | Rating: {{ buch.rating }}
+  </li>
+</ul>

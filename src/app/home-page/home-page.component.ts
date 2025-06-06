@@ -53,9 +53,19 @@ export class HomePageComponent {
 
   search() {
     const input = this.searchInput.trim();
-    const isIsbn = /^\d{9}(\d|X)$/.test(input);
+    const isIsbn = /^(\d{3}-\d{1,5}-\d{1,7}-\d{1,7}-[\dXx])$/.test(input);
+
+    if (!input && !this.rating && !this.art) return;
 
     const suchkriterien: any = isIsbn ? { isbn: input } : { titel: input };
+
+    if (input) {
+      if (isIsbn) {
+        suchkriterien.isbn = input;
+      } else {
+        suchkriterien.titel = input;
+      }
+    }
 
     if (this.rating) {
       suchkriterien.rating = this.rating;
@@ -64,8 +74,6 @@ export class HomePageComponent {
     if (this.art) {
       suchkriterien.art = this.art;
     }
-
-    if (!input && !this.rating && !this.art) return;
 
     this.router.navigate(['/buecher'], { queryParams: suchkriterien });
 

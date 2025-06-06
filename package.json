@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:AngularQl": "node dist/angular-ql/server/server.mjs"
+    "serve:ssr:AngularQl": "node dist/angular-ql/server/server.mjs",
+    "start:ssl": "ng serve --ssl true --ssl-cert ./tls/certificate.crt --ssl-key ./tls/key.pem"
   },
   "private": true,
   "dependencies": {

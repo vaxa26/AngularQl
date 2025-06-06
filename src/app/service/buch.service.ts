@@ -14,7 +14,10 @@ export class BuchService {
           buecher(suchkriterien: $suchkriterien) {
             id
             isbn
-            titel
+            titel {
+              titel
+              untertitel
+            }
           }
         }
       `,
