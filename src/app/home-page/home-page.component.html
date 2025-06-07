@@ -4,15 +4,16 @@
     <input type="text" [(ngModel)]="searchInput" (keyup.enter)="search()" placeholder="Search ISBN or Titel" />
   </div>
   <div class="rating">
-    <mat-icon *ngFor="let i of [1,2,3,4,5]" (click)="minRating = i" [class.selected]="i <= minRating">
-      {{ i <= minRating ? 'star' : 'star_border' }} </mat-icon>
+    <mat-slider min="0" max="5" step="1" thumbLabel [(ngModel)]="rating">
+      <input matSliderThumb />
+    </mat-slider>
   </div>
   <mat-form-field>
     <mat-label>Buch Art</mat-label>
-    <mat-select>
-      @for (art of arts; track art) {
-      <mat-option [value]="art.value">{{art.viewValue}}</mat-option>
-      }
+    <mat-select [(ngModel)]="art">
+      <mat-option *ngFor="let artItem of arts" [value]="artItem.value">
+        {{ artItem.viewValue }}
+      </mat-option>
     </mat-select>
   </mat-form-field>
 </div>
