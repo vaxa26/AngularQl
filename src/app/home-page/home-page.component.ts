@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSliderModule } from '@angular/material/slider';
 import { Router } from '@angular/router';
 import { BuchService } from '../service/buch.service';
 
@@ -28,6 +29,7 @@ interface Art {
     MatFormFieldModule,
     MatDialogModule,
     NgForOf,
+    MatSliderModule,
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
@@ -44,11 +46,10 @@ export class HomePageComponent {
   ) {}
 
   title = 'AngularQl';
-  minRating = 0;
   arts: Art[] = [
-    { value: '1', viewValue: 'Epub' },
-    { value: '2', viewValue: 'Paperback' },
-    { value: '3', viewValue: 'AGA' },
+    { value: 'EPUB', viewValue: 'Epub' },
+    { value: 'PAPERBACK', viewValue: 'Paperback' },
+    { value: 'HARDCOVER', viewValue: 'Hardcover' },
   ];
 
   search() {
@@ -65,7 +66,7 @@ export class HomePageComponent {
       }
     }
 
-    if (this.rating) {
+    if (this.rating !== null && this.rating !== undefined) {
       suchkriterien.rating = this.rating;
     }
 
