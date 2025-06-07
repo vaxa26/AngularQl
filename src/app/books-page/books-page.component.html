@@ -56,6 +56,10 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-<button matButton="backtoHome" routerLink="/home">
-  <mat-icon>home</mat-icon>
-  Zurück zur Startseite
+
+<div class="home-button-container">
+  <button mat-button (click)="homebutton()" class="home-button">
+    <mat-icon class="homeicon">home</mat-icon>
+    Zurück zur Startseite
+  </button>
+</div>

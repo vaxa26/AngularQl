@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BuchService } from '../service/buch.service';
 @Component({
   selector: 'app-books-page',
@@ -16,7 +16,9 @@ export class BooksPageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private buchservice: BuchService,
+    private router: Router,
   ) {}
+
   getStars(rating: number): any[] {
     return new Array(rating);
   }
@@ -38,5 +40,9 @@ export class BooksPageComponent implements OnInit {
         this.buecher = result.data.buecher;
       });
     });
+  }
+
+  homebutton() {
+    this.router.navigate(['/home']);
   }
 }
