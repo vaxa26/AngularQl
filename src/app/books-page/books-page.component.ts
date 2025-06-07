@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BuchService } from '../service/buch.service';
 @Component({
   selector: 'app-books-page',
-  imports: [CommonModule, MatTableModule],
+  imports: [CommonModule, MatTableModule, MatIconModule],
   templateUrl: './books-page.component.html',
   styleUrl: './books-page.component.scss',
 })
@@ -15,7 +16,23 @@ export class BooksPageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private buchservice: BuchService,
+    private router: Router,
   ) {}
+
+  getStars(rating: number): any[] {
+    return new Array(rating);
+  }
+
+  displayedColumns: string[] = [
+    'id',
+    'titel',
+    'rating',
+    'art',
+    'preis',
+    'lieferbar',
+    'datum',
+    'homepage',
+  ];
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
@@ -23,5 +40,9 @@ export class BooksPageComponent implements OnInit {
         this.buecher = result.data.buecher;
       });
     });
+  }
+
+  homebutton() {
+    this.router.navigate(['/home']);
   }
 }

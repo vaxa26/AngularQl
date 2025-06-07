@@ -18,6 +18,13 @@ export class BuchService {
               titel
               untertitel
             }
+            rating
+            art
+            preis
+            rabatt
+            lieferbar
+            datum
+            homepage
           }
         }
       `,

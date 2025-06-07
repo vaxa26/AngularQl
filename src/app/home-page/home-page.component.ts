@@ -55,9 +55,7 @@ export class HomePageComponent {
     const input = this.searchInput.trim();
     const isIsbn = /^(\d{3}-\d{1,5}-\d{1,7}-\d{1,7}-[\dXx])$/.test(input);
 
-    if (!input && !this.rating && !this.art) return;
-
-    const suchkriterien: any = isIsbn ? { isbn: input } : { titel: input };
+    const suchkriterien: any = {};
 
     if (input) {
       if (isIsbn) {
