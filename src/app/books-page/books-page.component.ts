@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BuchService } from '../service/buch.service';
 @Component({
   selector: 'app-books-page',
-  imports: [CommonModule, MatTableModule, MatIconModule],
+  imports: [CommonModule, MatTableModule],
   templateUrl: './books-page.component.html',
   styleUrl: './books-page.component.scss',
 })

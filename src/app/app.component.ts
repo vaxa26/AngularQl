@@ -10,12 +10,16 @@ interface Art {
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  constructor(private dialog: MatDialog) {}
+  constructor(
+    private dialog: MatDialog,
+    private router: RouterModule,
+  ) {}
 
   openLogin(): void {
     const dialogRef = this.dialog.open(LoginPopupComponent, {

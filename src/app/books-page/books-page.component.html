@@ -1,65 +1,37 @@
-<table mat-table [dataSource]="buecher" class="mat-elevation-z8" multiTemplateDataRows>
-
-  <!--ID-->
-  <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef> ID </th>
-    <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
-  </ng-container>
-
-  <!-- Titel -->
-  <ng-container matColumnDef="titel">
-    <th mat-header-cell *matHeaderCellDef> Titel </th>
-    <td mat-cell *matCellDef="let element"> {{ element.titel?.titel }} </td>
-  </ng-container>
-
-  <!-- Rating -->
-  <ng-container matColumnDef="rating">
-    <th mat-header-cell *matHeaderCellDef> Rating </th>
-    <td mat-cell *matCellDef="let element"> <mat-icon *ngFor="let star of getStars(element.rating)"
-        class="staricon">star</mat-icon>
-    </td>
-  </ng-container>
-
-  <!--Art-->
-  <ng-container matColumnDef="art">
-    <th mat-header-cell *matHeaderCellDef> Art </th>
-    <td mat-cell *matCellDef="let element"> {{ element.art }} </td>
-  </ng-container>
-
-  <!--Preis-->
-  <ng-container matColumnDef="preis">
-    <th mat-header-cell *matHeaderCellDef> Preis </th>
-    <td mat-cell *matCellDef="let element"> {{ element.preis | currency:'EUR' }} </td>
-  </ng-container>
-
-  <!--Lieferbar-->
-  <ng-container matColumnDef="lieferbar">
-    <th mat-header-cell *matHeaderCellDef> Lieferbar </th>
-    <td mat-cell *matCellDef="let element"> {{ element.lieferbar ? 'Ja' : 'Nein' }} </td>
-  </ng-container>
-
-  <!--Date-->
-  <ng-container matColumnDef="datum">
-    <th mat-header-cell *matHeaderCellDef> Datum </th>
-    <td mat-cell *matCellDef="let element"> {{ element.datum | date:'dd.MM.yyyy' }} </td>
-  </ng-container>
-
-  <!--Homepage-->
-  <ng-container matColumnDef="homepage">
-    <th mat-header-cell *matHeaderCellDef> Homepage </th>
-    <td mat-cell *matCellDef="let element">
-      <a [href]="element.homepage" target="_blank">{{ element.homepage }}</a>
-    </td>
-  </ng-container>
-
-  <!-- Render Header and Rows -->
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Titel</th>
+      <th>Rating</th>
+      <th>Art</th>
+      <th>Preis</th>
+      <th>Lieferbar</th>
+      <th>Datum</th>
+      <th>Homepage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let element of buecher">
+      <td>{{ element.id }}</td>
+      <td>{{ element.titel?.titel }}</td>
+      <td>
+        <i *ngFor="let star of getStars(element.rating)" class="fa-solid fa-star staricon"></i>
+      </td>
+      <td>{{ element.art }}</td>
+      <td>{{ element.preis | currency:'EUR' }}</td>
+      <td>{{ element.lieferbar ? 'Ja' : 'Nein' }}</td>
+      <td>{{ element.datum | date:'dd.MM.yyyy' }}</td>
+      <td>
+        <a [href]="element.homepage" target="_blank">{{ element.homepage }}</a>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
-<div class="home-button-container">
-  <button mat-button (click)="homebutton()" class="home-button">
-    <mat-icon class="homeicon">home</mat-icon>
+<div class="home-button-container mt-3">
+  <button class="btn btn-primary home-button" (click)="homebutton()">
+    <i class="fa-solid fa-home homeicon"></i>
     Zurück zur Startseite
   </button>
 </div>

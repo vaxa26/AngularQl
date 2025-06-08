@@ -1,14 +1,6 @@
 import { NgForOf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatSelectModule } from '@angular/material/select';
-import { MatSliderModule } from '@angular/material/slider';
 import { Router } from '@angular/router';
 import { BuchService } from '../service/buch.service';
 
@@ -19,18 +11,8 @@ interface Art {
 
 @Component({
   selector: 'app-home-page',
-  imports: [
-    FormsModule,
-    MatMenuModule,
-    MatButtonModule,
-    MatIconModule,
-    MatInputModule,
-    MatSelectModule,
-    MatFormFieldModule,
-    MatDialogModule,
-    NgForOf,
-    MatSliderModule,
-  ],
+  standalone: true,
+  imports: [NgForOf, FormsModule],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
