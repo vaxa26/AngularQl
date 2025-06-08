@@ -38,12 +38,13 @@ export const appConfig: ApplicationConfig = {
     // Apollo Client Setup mit HttpLink
     provideApollo(() => {
       const httpLink = inject(HttpLink);
-
       const authLink = new ApolloLink((operation, forward) => {
-        // Optional: hier kannst du dynamisch operationName setzen
+        const token = localStorage.getItem('access_token');
+
         operation.setContext(({ headers = {} }) => ({
           headers: {
             ...headers,
+            Authorization: token ? `Bearer ${token}` : '',
             'x-apollo-operation-name':
               operation.operationName || 'UnnamedOperation',
           },

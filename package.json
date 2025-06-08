@@ -31,6 +31,7 @@
     "express": "^4.18.2",
     "font-awesome": "^4.7.0",
     "graphql": "^16",
+    "keycloak-js": "^26.2.0",
     "prettier": "^3.5.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
