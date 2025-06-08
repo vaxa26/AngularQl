@@ -1,26 +1,31 @@
-<h1 class="hLogin">Login</h1>
-<div class="Login">
+<header class="header">
+  <h1 class="hLogin">Login</h1>
+  <!-- Close Button -->
   <div class="close">
-    <button mat-icon-button (click)="close()">
-      <mat-icon>close</mat-icon>
+    <button type="button" class="btn btn-light btn-sm" aria-label="Close" (click)="close()">
+      <i class="fa-solid fa-xmark"></i>
     </button>
   </div>
-  <mat-dialog-content>
-    <div class="inputfield">
-      <mat-form-field appearance="fill">
-        <input matInput placeholder="Name" />
-      </mat-form-field>
+</header>
 
-      <mat-form-field appearance="fill">
-        <input matInput [type]="isHidden ? 'password' : 'text'" placeholder="Passwort" />
-        <button mat-icon-button matSuffix (click)="togglePasswordVisibility()"
-          [attr.aria-label]="'Toggle password visibility'" [attr.aria-pressed]="!isHidden">
-          <mat-icon>{{ isHidden ? 'visibility_off' : 'visibility' }}</mat-icon>
-        </button>
-      </mat-form-field>
+<div class="Login">
+  <!-- Dialog Content -->
+  <div class="inputfield mb-3">
+    <div class="mb-3">
+      <input type="text" class="form-control" placeholder="Name" [(ngModel)]="username" />
     </div>
-    <div class="buttonfield">
-      <button mat-raised-button color="primary" (click)="login()">Login</button>
+
+    <div class="mb-3 input-group">
+      <input [type]="isHidden ? 'password' : 'text'" class="form-control" placeholder="Passwort"
+        [(ngModel)]="password" />
+      <button type="button" class="btn btn-outline-secondary" (click)="togglePasswordVisibility()"
+        [attr.aria-label]="'Toggle password visibility'" [attr.aria-pressed]="!isHidden">
+        <i class="fa-solid" [ngClass]="isHidden ? 'fa-eye-slash' : 'fa-eye'"></i>
+      </button>
     </div>
-  </mat-dialog-content>
+  </div>
+
+  <div class="buttonfield">
+    <button type="button" class="btn btn-primary w-100" (click)="login()">Login</button>
+  </div>
 </div>

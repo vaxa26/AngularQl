@@ -7,7 +7,7 @@
   max-width: 500px;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1px;
 
   .search-field {
     display: flex;
@@ -16,9 +16,9 @@
     border-radius: 1rem;
     padding: 0.5rem 1rem;
 
-    .icon {
-      margin-right: 0.5rem;
-      color: gray;
+    fa-solid {
+      border: none;
+      color: rgb(126, 126, 126);
     }
 
     input {
@@ -31,7 +31,7 @@
   }
 }
 mat-slider {
-  width: 500px;
+  width: 100%;
 }
 
 .stars mat-icon {

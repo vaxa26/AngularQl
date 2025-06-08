@@ -1,19 +1,21 @@
 <div class="search-box">
-  <div class="search-field">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <input type="text" [(ngModel)]="searchInput" (keyup.enter)="search()" placeholder="Search ISBN or Titel" />
+  <div class="search-field input-group mb-3">
+    <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
+    <input type="text" class="form-control" [(ngModel)]="searchInput" (keyup.enter)="search()"
+      placeholder="Search ISBN or Titel" />
   </div>
-  <div class="rating">
-    <mat-slider min="0" max="5" step="1" thumbLabel [(ngModel)]="rating">
-      <input matSliderThumb />
-    </mat-slider>
+
+  <div class="rating mb-3">
+    <label for="ratingRange" class="form-label">Bewertung: {{ rating }}</label>
+    <input type="range" class="form-range" id="ratingRange" min="0" max="5" step="1" [(ngModel)]="rating" />
   </div>
-  <mat-form-field>
-    <mat-label>Buch Art</mat-label>
-    <mat-select [(ngModel)]="art">
-      <mat-option *ngFor="let artItem of arts" [value]="artItem.value">
+
+  <div class="mb-3">
+    <label for="buchArt" class="form-label">Buch Art</label>
+    <select id="buchArt" class="form-select" [(ngModel)]="art">
+      <option *ngFor="let artItem of arts" [value]="artItem.value">
         {{ artItem.viewValue }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+      </option>
+    </select>
+  </div>
 </div>
