@@ -1,23 +1,34 @@
-import { NgClass } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { NgClass, NgIf } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms'; // Importiere FormsModule
+import { MatDialogRef } from '@angular/material/dialog';
 import { KeycloakService } from '../service/keycloack.service';
 
 @Component({
   selector: 'app-login-popup',
   standalone: true,
-  imports: [NgClass, FormsModule],
+  imports: [NgClass, NgIf, FormsModule],
   templateUrl: './login-popup.component.html',
   styleUrls: ['./login-popup.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginPopupComponent {
-  isVisible = true;
+  showLoginPopup = true;
   username: string = '';
   password: string = '';
   error: string | null = null;
+  authService: any;
+  isAdmin: boolean = false;
 
-  constructor(private keycloakService: KeycloakService) {}
+  constructor(
+    private keycloakService: KeycloakService,
+    private dialogRef: MatDialogRef<LoginPopupComponent>,
+    private cdr: ChangeDetectorRef,
+  ) {}
 
   async login() {
     this.error = null;
@@ -27,21 +38,26 @@ export class LoginPopupComponent {
         this.password,
       );
       if (success) {
-        this.close();
+        this.dialogRef.close({ success: true });
         console.log('Login erfolgreich');
       } else {
         this.error =
           'Login fehlgeschlagen. Bitte überprüfen Sie Ihre Anmeldedaten.';
+        this.cdr.detectChanges();
       }
     } catch (err) {
       console.error('Login-Fehler:', err);
       this.error =
         'Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.';
+      this.cdr.detectChanges();
     }
+    this.isAdmin = this.keycloakService.hasRole('admin');
+    console.log('Ist Admin:', this.isAdmin);
   }
   close() {
-    this.isVisible = false;
+    this.dialogRef.close();
   }
+
   isHidden = true;
 
   togglePasswordVisibility(): void {
