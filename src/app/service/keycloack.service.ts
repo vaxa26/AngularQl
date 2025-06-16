@@ -33,4 +33,30 @@ export class KeycloakService {
   getToken(): string | null {
     return localStorage.getItem('access_token');
   }
+
+  getRoles(): string[] {
+    if (typeof window === 'undefined') return [];
+
+    const token = this.getToken();
+    if (!token) return [];
+
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    console.log('Token payload:', payload);
+    return payload?.realm_access?.roles || [];
+  }
+
+  hasRole(role: string): boolean {
+    const token = this.getToken();
+    if (!token) return false;
+
+    const payload = JSON.parse(atob(token.split('.')[1]));
+
+    // 1. Prüfe Realm-Rollen
+    const realmRoles = payload?.realm_access?.roles || [];
+    if (realmRoles.includes(role)) return true;
+
+    // 2. Prüfe Client-Rollen (z. B. "nest-client")
+    const clientRoles = payload?.resource_access?.['nest-client']?.roles || [];
+    return clientRoles.includes(role);
+  }
 }

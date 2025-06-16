@@ -28,4 +28,7 @@
   <div class="buttonfield">
     <button type="button" class="btn btn-primary w-100" (click)="login()">Login</button>
   </div>
+  <div *ngIf="error" class="text-danger text-center mt-2">
+    {{ error }}
+  </div>
 </div>
