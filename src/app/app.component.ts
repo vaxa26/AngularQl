@@ -65,7 +65,9 @@ export class AppComponent {
   }
 
   logout() {
-    localStorage.removeItem('access_token');
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('access_token');
+    }
     this.isAdmin = false;
     window.location.reload();
   }
@@ -75,10 +77,6 @@ export class AppComponent {
   }
 
   hinzufuegen() {
-    // Logik hier
-  }
-
-  loeschen() {
     // Logik hier
   }
 }

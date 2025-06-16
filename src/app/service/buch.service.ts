@@ -31,4 +31,15 @@ export class BuchService {
       variables: { suchkriterien },
     }).valueChanges;
   }
+
+  deleteBuch(id: string) {
+    return this.apollo.mutate({
+      mutation: gql`
+        mutation ($id: ID!) {
+          delete(id: $id)
+        }
+      `,
+      variables: { id },
+    });
+  }
 }

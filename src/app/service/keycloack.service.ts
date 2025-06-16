@@ -31,6 +31,9 @@ export class KeycloakService {
   }
 
   getToken(): string | null {
+    if (typeof window === 'undefined') {
+      return null; // lokal nicht verfügbar in SSR
+    }
     return localStorage.getItem('access_token');
   }
 
