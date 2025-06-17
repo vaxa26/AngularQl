@@ -1,0 +1,47 @@
+.add-box {
+  background-color: #e0e0e0;
+  border-radius: 2rem;
+  padding: 2rem;
+  margin-top: 2rem;
+  width: 150%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .ISBN-input {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+  }
+
+  .titel-input {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .star-rating {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+
+    i {
+      font-size: 1.5rem;
+      padding-right: 0.1rem;
+      color: #ffa600; // Default-Sternfarbe (z. B. grau/blau)
+    }
+
+    .filled {
+      color: #ffa600; // Gefüllter Stern (Blau)
+    }
+
+    .filled.low {
+      color: #ffa600; // Gefüllter Stern bei niedriger Bewertung (Rot)
+    }
+  }
+}

@@ -2,7 +2,7 @@ import { NgIf } from '@angular/common';
 import { Component, TemplateRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { NgbOffcanvas, NgbOffcanvasConfig } from '@ng-bootstrap/ng-bootstrap';
 import { LoginPopupComponent } from './login-popup/login-popup.component';
 import { KeycloakService } from './service/keycloack.service';
@@ -25,20 +25,19 @@ export class AppComponent {
 
   constructor(
     private dialog: MatDialog,
-    private router: RouterModule,
+    private router: Router,
     private snackBar: MatSnackBar,
     private keyclockservice: KeycloakService,
     config: NgbOffcanvasConfig,
     private offcanvasService: NgbOffcanvas,
   ) {
     config.position = 'end';
-    config.backdropClass = 'bg-info';
+    config.backdropClass = '';
     config.keyboard = false;
   }
 
   ngOnInit(): void {
     this.isAdmin = this.keyclockservice.hasRole('admin');
-    console.log('Bin ich Admin?', this.isAdmin);
   }
 
   openLogin(): void {
@@ -77,6 +76,6 @@ export class AppComponent {
   }
 
   hinzufuegen() {
-    // Logik hier
+    this.router.navigate(['/add']);
   }
 }

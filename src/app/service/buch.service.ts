@@ -32,6 +32,19 @@ export class BuchService {
     }).valueChanges;
   }
 
+  createBuch(input: any) {
+    return this.apollo.mutate<{ create: { id: number } }>({
+      mutation: gql`
+        mutation ($input: BuchInput!) {
+          create(input: $input) {
+            id
+          }
+        }
+      `,
+      variables: { input },
+    });
+  }
+
   deleteBuch(id: string) {
     return this.apollo.mutate({
       mutation: gql`
