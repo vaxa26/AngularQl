@@ -6,7 +6,9 @@
         <span *ngIf="isAdmin"> Admin</span>
       </button>
     </div>
-    <img src="HKA_White.png" alt="HKA Logo" class="HKA_White" />
+    <a routerLink="/home">
+  <img src="HKA_White.png" alt="HKA Logo" class="HKA_White" style="cursor: pointer;" />
+</a>
     <ng-template #content let-offcanvas>
       <div class="offcanvas-header">
         <h4 class="offcanvas-title">Features</h4>
