@@ -62,4 +62,7 @@ export class HomePageComponent {
       this.buecher = result.data.buecher;
     });
   }
+  geheZuAddSeite() {
+  this.router.navigate(['/add']);
+}
 }

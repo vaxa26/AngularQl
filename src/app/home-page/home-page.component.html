@@ -1,21 +1,57 @@
-<div class="search-box">
-  <div class="search-field input-group mb-3">
-    <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
-    <input type="text" class="form-control" [(ngModel)]="searchInput" (keyup.enter)="search()"
-      placeholder="Search ISBN or Titel" />
+<div class="container mt-5">
+
+  <h2 class="text-center mb-4">📚 Willkommen in der BuchApp</h2>
+
+  <!-- 🔎 Suchleiste -->
+  <div class="search-box p-4 bg-light rounded shadow-sm mb-4">
+    <div class="search-field input-group mb-3">
+      <span class="input-group-text">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </span>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="searchInput"
+        (keyup.enter)="search()"
+        placeholder="🔍 Suche nach ISBN oder Titel"
+      />
+    </div>
+
+    <!-- ⭐ Bewertung -->
+    <div class="rating mb-3">
+      <label for="ratingRange" class="form-label fw-bold">⭐ Bewertung: {{ rating }}</label>
+      <input
+        type="range"
+        class="form-range"
+        id="ratingRange"
+        min="0"
+        max="5"
+        step="1"
+        [(ngModel)]="rating"
+      />
+    </div>
+
+    <!-- 📘 Buch-Art Dropdown -->
+    <div class="mb-3">
+      <label for="buchArt" class="form-label fw-bold">📘 Buch-Art</label>
+      <select id="buchArt" class="form-select" [(ngModel)]="art">
+        <option *ngFor="let artItem of arts" [value]="artItem.value">
+          {{ artItem.viewValue }}
+        </option>
+      </select>
+    </div>
+
+    <!-- 🟢 Suchen Button -->
+    <button class="btn btn-primary w-100" (click)="search()">
+      🔍 Jetzt suchen
+    </button>
   </div>
 
-  <div class="rating mb-3">
-    <label for="ratingRange" class="form-label">Bewertung: {{ rating }}</label>
-    <input type="range" class="form-range" id="ratingRange" min="0" max="5" step="1" [(ngModel)]="rating" />
+  <!-- ➕ Neues Buch anlegen Button -->
+  <div class="text-center mt-4">
+   <button class="btn btn-success" (click)="geheZuAddSeite()">
+  ➕ Neues Buch anlegen
+</button>
   </div>
 
-  <div class="mb-3">
-    <label for="buchArt" class="form-label">Buch Art</label>
-    <select id="buchArt" class="form-select" [(ngModel)]="art">
-      <option *ngFor="let artItem of arts" [value]="artItem.value">
-        {{ artItem.viewValue }}
-      </option>
-    </select>
-  </div>
 </div>
