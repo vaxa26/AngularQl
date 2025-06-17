@@ -1,0 +1,101 @@
+<div class="add-box">
+  <div class="ISBN-input">
+    <label> ISBN </label>
+    <input type="text" [(ngModel)]="isbnInput" placeholder="ISBN" class="form-control" />
+  </div>
+  <div class="titel-input">
+    <input type="text" [(ngModel)]="isTitle" placeholder="Titel" class="form-control" />
+    <input type="text" [(ngModel)]="isUntertitel" placeholder="Untertitel" class="form-control" />
+  </div>
+  <!-- Rating -->
+  <div class="star-rating">
+    <span>Rating:</span>
+    <ngb-rating [(rate)]="rating">
+      <ng-template let-fill="fill" let-index="index">
+        <i class="fa-star" [ngClass]="{
+              'fa-solid': fill === 100,
+              'fa-regular': fill !== 100,
+              'filled': fill === 100,
+            }">
+        </i>
+      </ng-template>
+    </ngb-rating>
+  </div>
+  <div class="d-flex align-items-center justify-content-center gap-3">
+    <!-- Dropdown -->
+    <div ngbDropdown class="d-inline-block">
+      <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
+        Buch Art
+      </button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button ngbDropdownItem (click)="selectArt('EPUB')">EPUB</button>
+        <button ngbDropdownItem (click)="selectArt('PAPERBACK')">PAPERBACK</button>
+        <button ngbDropdownItem (click)="selectArt('HARDCOVER')">HARDCOVER</button>
+      </div>
+    </div>
+
+    <!-- Inputs -->
+    <!-- Preis-Eingabe mit € -->
+    <div class="input-group" style="max-width: 140px;">
+      <input type="number" [(ngModel)]="isPrice" class="form-control" placeholder="Preis" />
+      <span class="input-group-text">€</span>
+    </div>
+
+    <!-- Rabatt mit % -->
+    <div class="input-group" style="max-width: 140px;">
+      <input type="number" [(ngModel)]="isSale" class="form-control" placeholder="Rabatt" />
+      <span class="input-group-text">%</span>
+    </div>
+  </div>
+  <!-- Lieferbar Checkbox -->
+  <div class="d-flex align-items-center justify-content-center gap-2 mt-2">
+    <div class="form-check d-flex align-items-center mb-0">
+      <input class="form-check-input me-1" type="checkbox" id="flexCheckDefault" [(ngModel)]="lieferbar" /> <label
+        class="form-check-label" for="flexCheckDefault">Lieferbar</label>
+    </div>
+    <!-- Datum Picker -->
+    <div class="input-group input-group-sm w-auto" style="max-width: 180px;">
+      <input class="form-control" placeholder="yyyy-mm-dd" name="datum" [(ngModel)]="model" ngbDatepicker
+        #d="ngbDatepicker" />
+      <button class="btn btn-outline-secondary" type="button" (click)="d.toggle()" title="Datum auswählen">
+        <i class="fa-solid fa-calendar-days"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="homepage-input">
+    <label> URL </label>
+    <input type="text" [(ngModel)]="ishomepage" placeholder="Homepage hinzufügen" class="form-control" />
+  </div>
+
+  <!--Schlagwoerter-->
+  <div class="schlagwoerter">
+    <label for="tagInput" class="form-label">Schlagwörter</label>
+    <input type="text" id="tagInput" class="form-control" placeholder="Mit Enter hinzufügen" [(ngModel)]="tagInput"
+      (keydown.enter)="addTag()" />
+
+    <!-- Zeige vorhandene Tags als "Chips" -->
+    <div class="mt-2">
+      <span class="badge bg-primary me-1" *ngFor="let tag of schlagwoerter; let i = index">
+        {{ tag }}
+        <button type="button" class="btn-close btn-close-white btn-sm ms-1" (click)="removeTag(i)"></button>
+      </span>
+    </div>
+  </div>
+
+  <div class="mb-2">
+    <label class="form-label">Abbildungen</label>
+    <div *ngFor="let abbildung of abbildungen; let i = index" class="mb-2 border p-2 rounded">
+      <div class="mb-2">
+        <input type="text" class="form-control mb-1" placeholder="Beschriftung"
+          [(ngModel)]="abbildungen[i].beschriftung" name="beschriftung{{i}}" />
+        <input type="text" class="form-control" placeholder="Content-Type (z.B. image/png)"
+          [(ngModel)]="abbildungen[i].contentType" name="contentType{{i}}" />
+      </div>
+      <button class="btn btn-danger btn-sm" type="button" (click)="removeAbbildung(i)">Entfernen</button>
+    </div>
+
+    <button class="btn btn-secondary btn-sm mt-2" type="button" (click)="addAbbildung()">+ Neue Abbildung</button>
+  </div>
+  <button class="btn btn-success mt-3" (click)="createBook()">📘 Buch erstellen</button>
+</div>
