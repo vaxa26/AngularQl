@@ -1,4 +1,4 @@
-import { NgClass, NgFor } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
@@ -22,12 +22,14 @@ import { BuchService } from '../service/buch.service';
     NgbAlertModule,
     FormsModule,
     NgFor,
+    NgIf,
   ],
   templateUrl: './add-book-page.component.html',
   styleUrl: './add-book-page.component.scss',
 })
 export class AddBookPageComponent {
   isbnInput = '';
+  isbnRaw = '';
   isTitle = '';
   isUntertitel = '';
   rating = 0;
@@ -42,7 +44,10 @@ export class AddBookPageComponent {
   tagInput: string = '';
   ishomepage = '';
   schlagwoerter: string[] = [];
-  abbildungen: { beschriftung: string; contentType: string }[] = [];
+  abbildungen: { beschriftung: string; contentType: string }[] = [
+    { beschriftung: '', contentType: '' },
+  ];
+  errorMsg: string[] = [];
 
   addAbbildung() {
     this.abbildungen.push({
@@ -65,6 +70,17 @@ export class AddBookPageComponent {
     }
     this.tagInput = '';
   }
+  onIsbnChange(value: string) {
+    const digits = value.replace(/[^0-9X]/gi, '').substring(0, 13); // max. 13 Zeichen
+    this.isbnRaw = digits;
+
+    // Manuell: 3-1-3-5-1
+    let formatted = digits;
+    if (digits.length >= 13) {
+      formatted = `${digits.slice(0, 3)}-${digits.slice(3, 4)}-${digits.slice(4, 7)}-${digits.slice(7, 12)}-${digits.slice(12)}`;
+    }
+    this.isbnInput = formatted;
+  }
 
   constructor(
     private buchService: BuchService,
@@ -75,7 +91,7 @@ export class AddBookPageComponent {
 
   createBook() {
     const input = {
-      isbn: this.isbnInput || undefined,
+      isbn: this.isbnRaw || undefined,
       rating: this.rating || undefined,
       art: this.buchart || undefined,
       preis: this.isPrice ?? undefined,
@@ -106,8 +122,8 @@ export class AddBookPageComponent {
         console.log(res.data?.create.id);
       },
       error: (err) => {
-        alert('❌ Fehler beim Erstellen des Buches');
-        console.error(err);
+        const messages = err?.graphQLErrors?.[0]?.message?.split(',') ?? [];
+        this.errorMsg = messages.map((msg: string) => msg.trim());
       },
     });
   }
