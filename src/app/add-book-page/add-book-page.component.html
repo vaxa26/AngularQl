@@ -84,18 +84,19 @@
   </div>
 
   <div class="mb-2">
-    <label class="form-label">Abbildungen</label>
-    <div *ngFor="let abbildung of abbildungen; let i = index" class="mb-2 border p-2 rounded">
-      <div class="mb-2">
-        <input type="text" class="form-control mb-1" placeholder="Beschriftung"
-          [(ngModel)]="abbildungen[i].beschriftung" name="beschriftung{{i}}" />
-        <input type="text" class="form-control" placeholder="Content-Type (z.B. image/png)"
-          [(ngModel)]="abbildungen[i].contentType" name="contentType{{i}}" />
-      </div>
-      <button class="btn btn-danger btn-sm" type="button" (click)="removeAbbildung(i)">Entfernen</button>
-    </div>
-
-    <button class="btn btn-secondary btn-sm mt-2" type="button" (click)="addAbbildung()">+ Neue Abbildung</button>
+    <label class="form-label">Abbildung</label>
+    <input type="text" class="form-control mb-1" placeholder="Beschriftung" [(ngModel)]="abbildungen[0].beschriftung"
+      name="beschriftung0" />
+    <input type="text" class="form-control" placeholder="Content-Type (z.B. image/png)"
+      [(ngModel)]="abbildungen[0].contentType" name="contentType0" />
   </div>
+
+  <ngb-alert *ngIf="errorMsg.length" type="danger" (close)="errorMsg = []">
+    <ul class="mb-0">
+      <li *ngFor="let msg of errorMsg">
+        {{ msg }}
+      </li>
+    </ul>
+  </ngb-alert>
   <button class="btn btn-success mt-3" (click)="createBook()">📘 Buch erstellen</button>
 </div>
