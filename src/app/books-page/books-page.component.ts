@@ -11,7 +11,7 @@ import { KeycloakService } from '../service/keycloack.service';
   styleUrl: './books-page.component.scss',
 })
 export class BooksPageComponent implements OnInit {
-  isAdmin: boolean = false;
+  isAdmin = false;
 
   buecher: any[] = [];
 

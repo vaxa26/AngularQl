@@ -8,8 +8,9 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:AngularQl": "node dist/angular-ql/server/server.mjs",
-    "start:ssl": "ng serve --ssl true --ssl-cert ./tls/certificate.crt --ssl-key ./tls/key.pem"
+"e2e": "npx playwright test playwright/tests/add-book.spec.ts && npx playwright test playwright/tests/login.spec.ts",    "serve:ssr:AngularQl": "node dist/angular-ql/server/server.mjs",
+    "start:ssl": "ng serve --ssl true --ssl-cert ./tls/certificate.crt --ssl-key ./tls/key.pem",
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
@@ -28,6 +29,7 @@
     "@apollo/client": "^3.0.0",
     "@fortawesome/fontawesome-free": "^6.7.2",
     "@ng-bootstrap/ng-bootstrap": "^18.0.0",
+    "@playwright/test": "^1.53.1",
     "@popperjs/core": "^2.11.8",
     "angular-eslint": "^19.6.0",
     "apollo-angular": "^10.0.3",
@@ -36,8 +38,9 @@
     "express": "^4.18.2",
     "font-awesome": "^4.7.0",
     "graphql": "^16",
+    "install": "^0.13.0",
     "keycloak-js": "^26.2.0",
-    "prettier": "^3.5.3",
+    "npm": "^11.4.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
@@ -49,12 +52,19 @@
     "@types/express": "^4.17.17",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^18.18.0",
+    "angular-eslint": "19.6.0",
+    "eslint": "^9.27.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.5.0",
     "jasmine-core": "~5.6.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.7.2"
+    "prettier": "^3.5.3",
+    "start-server-and-test": "^2.0.12",
+    "typescript": "~5.7.2",
+    "typescript-eslint": "8.32.1"
   }
 }

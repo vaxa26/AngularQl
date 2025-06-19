@@ -19,10 +19,10 @@ import { KeycloakService } from '../service/keycloack.service';
 export class LoginPopupComponent {
   showLoginPopup = true;
   username = '';
-  password: string = '';
+  password = '';
   error: string | null = null;
   authService: any;
-  isAdmin: boolean = false;
+  isAdmin = false;
 
   constructor(
     private keycloakService: KeycloakService,
