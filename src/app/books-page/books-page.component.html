@@ -7,11 +7,7 @@
       <th>Titel</th>
       <th>Rating</th>
       <th>Art</th>
-      <th>Preis</th>
       <th>Lieferbar</th>
-      <th>Datum</th>
-      <th>Homepage</th>
-      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -22,23 +18,13 @@
         </button>
       </td>
       <td>{{ element.id }}</td>
-      <td>{{ element.Isbn}}</td>
+      <td>{{ element.isbn}}</td>
       <td>{{ element.titel?.titel }}</td>
       <td>
         <i *ngFor="let star of getStars(element.rating)" class="fa-solid fa-star staricon"></i>
       </td>
       <td>{{ element.art }}</td>
-      <td>{{ element.preis | currency:'EUR' }}</td>
       <td>{{ element.lieferbar ? 'Ja' : 'Nein' }}</td>
-      <td>{{ element.datum | date:'dd.MM.yyyy' }}</td>
-      <td>
-        <a [href]="element.homepage" target="_blank">{{ element.homepage }}</a>
-      </td>
-      <td>
-        <button *ngIf="isAdmin" class="btn btn-sm btn-outline-primary" (click)="bearbeiten(element)">
-          <i class="fa-solid fa-pen"></i>
-        </button>
-      </td>
     </tr>
   </tbody>
 </table>

@@ -1,32 +1,32 @@
-<div class="main-container">
-  <header class="header">
-    <div class="Login">
-      <button mat-button (click)="openLogin()" class="User">
-        <i class="fa-solid fa-user fa-2xl"></i>
-        <span *ngIf="isAdmin"> Admin</span>
+<header class="header">
+  <div class="Login">
+    <button mat-button (click)="openLogin()" class="User">
+      <i class="fa-solid fa-user fa-2xl"></i>
+      <span *ngIf="isAdmin"> Admin</span>
+    </button>
+  </div>
+  <a routerLink="/home">
+    <img src="HKA_White.png" alt="HKA Logo" class="HKA_White" style="cursor: pointer;" />
+  </a>
+  <ng-template #content let-offcanvas>
+    <div class="offcanvas-header">
+      <h4 class="offcanvas-title">Features</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column gap-3">
+      <button class="btn btn-success" (click)="hinzufuegen()">
+        <i class="fa-solid fa-plus me-2"></i> Hinzufügen
+      </button>
+
+      <button class="btn btn-danger" (click)="logout()">
+        <i class="fa-solid fa-trash me-2"></i> Logout
       </button>
     </div>
-    <a routerLink="/home">
-  <img src="HKA_White.png" alt="HKA Logo" class="HKA_White" style="cursor: pointer;" />
-</a>
-    <ng-template #content let-offcanvas>
-      <div class="offcanvas-header">
-        <h4 class="offcanvas-title">Features</h4>
-        <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
-      </div>
-      <div class="offcanvas-body d-flex flex-column gap-3">
-        <button class="btn btn-success" (click)="hinzufuegen()">
-          <i class="fa-solid fa-plus me-2"></i> Hinzufügen
-        </button>
+  </ng-template>
 
-        <button class="btn btn-danger" (click)="logout()">
-          <i class="fa-solid fa-trash me-2"></i> Logout
-        </button>
-      </div>
-    </ng-template>
-
-    <button *ngIf="isAdmin" class="btn btn-outline-primary" (click)="open(content)"><i
-        class="fa-solid fa-bars"></i></button>
-  </header>
+  <button *ngIf="isAdmin" class="btn btn-outline-primary" (click)="open(content)"><i
+      class="fa-solid fa-bars"></i></button>
+</header>
+<div class="main-container">
   <router-outlet></router-outlet>
 </div>

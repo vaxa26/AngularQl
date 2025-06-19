@@ -4,6 +4,29 @@
   align-items: center;
   background: white;
   position: relative;
+  padding: 1rem;
+  width: 100%;
+  max-width: 100%;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: center;
+    padding: 2rem 4rem;
+  }
+}
+.form-container {
+  width: 100%;
+  max-width: 480px;
+  padding: 1rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+  margin-top: 1rem;
+
+  @media (min-width: 768px) {
+    margin-left: 2rem;
+    margin-top: 0;
+  }
 }
 
 .header {
@@ -19,17 +42,20 @@
     cursor: pointer;
     top: 10px;
     r: 5px;
+    margin: auto;
   }
 
   .HKA_White {
-    width: 50%;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
     display: block;
     margin: auto;
-    align-items: center;
   }
   .menu-icon {
     font-size: 2rem;
     cursor: pointer;
+    margin: auto;
   }
 }
 

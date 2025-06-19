@@ -33,10 +33,7 @@ export class BooksPageComponent implements OnInit {
     'titel',
     'rating',
     'art',
-    'preis',
     'lieferbar',
-    'datum',
-    'homepage',
   ];
 
   ngOnInit() {
@@ -66,6 +63,7 @@ export class BooksPageComponent implements OnInit {
         this.buecher = result.data.buecher;
       });
     });
+    this.isAdmin = this.keyclockservice.hasRole('admin');
   }
   homebutton() {
     this.router.navigate(['/home']);
