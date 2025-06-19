@@ -41,45 +41,58 @@ export class AddBookPageComponent {
   isSale: number | null = null;
   lieferbar = false;
   model?: NgbDateStruct;
-  tagInput = '';
-  ishomepage = '';
+  ishomepage = 'https://';
+  verfuegbareSchlagwoerter: string[] = [
+    'JAVASCRIPT',
+    'TYPESCRIPT',
+    'JAVA',
+    'PYTHON',
+  ];
   schlagwoerter: string[] = [];
   abbildungen: { beschriftung: string; contentType: string }[] = [
     { beschriftung: '', contentType: '' },
   ];
   errorMsg: string[] = [];
 
-  addAbbildung() {
-    this.abbildungen.push({
-      beschriftung: '',
-      contentType: '',
-    });
-  }
-  removeAbbildung(index: number) {
-    this.abbildungen.splice(index, 1);
-  }
-
-  removeTag(index: number) {
-    this.schlagwoerter.splice(index, 1);
-  }
-
-  addTag() {
-    const trimmed = this.tagInput.trim().toUpperCase();
-    if (trimmed && !this.schlagwoerter.includes(trimmed)) {
-      this.schlagwoerter.push(trimmed);
-    }
-    this.tagInput = '';
-  }
   onIsbnChange(value: string) {
-    const digits = value.replace(/[^0-9X]/gi, '').substring(0, 13); // max. 13 Zeichen
+    const digits = value.replace(/[^0-9X]/gi, '').substring(0, 13);
     this.isbnRaw = digits;
 
-    // Manuell: 3-1-3-5-1
     let formatted = digits;
-    if (digits.length >= 13) {
-      formatted = `${digits.slice(0, 3)}-${digits.slice(3, 4)}-${digits.slice(4, 7)}-${digits.slice(7, 12)}-${digits.slice(12)}`;
+
+    if (digits.length > 0) {
+      formatted = digits.slice(0, 3);
     }
+    if (digits.length > 3) {
+      formatted += '-' + digits.slice(3, 4);
+    }
+    if (digits.length > 4) {
+      formatted += '-' + digits.slice(4, 7);
+    }
+    if (digits.length > 7) {
+      formatted += '-' + digits.slice(7, 12);
+    }
+    if (digits.length > 12) {
+      formatted += '-' + digits.slice(12);
+    }
+
     this.isbnInput = formatted;
+  }
+
+  toggleSchlagwort(wort: string, event: Event) {
+    const checked = (event.target as HTMLInputElement).checked;
+    if (checked && !this.schlagwoerter.includes(wort)) {
+      this.schlagwoerter.push(wort);
+    } else if (!checked) {
+      this.schlagwoerter = this.schlagwoerter.filter((w) => w !== wort);
+    }
+  }
+
+  isHomepageValid(): boolean {
+    if (!this.ishomepage) return false;
+
+    const pattern = /^https:\/\/[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/.*)?$/;
+    return pattern.test(this.ishomepage);
   }
 
   constructor(

@@ -3,6 +3,7 @@
     <tr>
       <th></th>
       <th>ID</th>
+      <th>Isbn</th>
       <th>Titel</th>
       <th>Rating</th>
       <th>Art</th>
@@ -21,6 +22,7 @@
         </button>
       </td>
       <td>{{ element.id }}</td>
+      <td>{{ element.Isbn}}</td>
       <td>{{ element.titel?.titel }}</td>
       <td>
         <i *ngFor="let star of getStars(element.rating)" class="fa-solid fa-star staricon"></i>

@@ -1,7 +1,7 @@
 import { NgForOf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BuchService } from '../service/buch.service';
 
 interface Art {
@@ -25,7 +25,24 @@ export class HomePageComponent {
   constructor(
     private buchservice: BuchService,
     private router: Router,
+    private route: ActivatedRoute,
   ) {}
+
+  ngOnInit() {
+    this.route.queryParams.subscribe((params) => {
+      const rawRating = params['rating'];
+      const ratingNum =
+        rawRating !== undefined ? parseInt(rawRating, 10) : null;
+
+      this.rating = Number.isInteger(ratingNum) ? ratingNum : null;
+      this.searchInput = params['titel'] || '';
+      this.art = params['art'] || '';
+
+      if (this.searchInput || this.rating !== null || this.art) {
+        this.search();
+      }
+    });
+  }
 
   title = 'AngularQl';
   arts: Art[] = [
@@ -48,21 +65,30 @@ export class HomePageComponent {
       }
     }
 
-    if (this.rating !== null && this.rating !== undefined) {
-      suchkriterien.rating = this.rating;
+    if (typeof this.rating === 'number' && !isNaN(this.rating)) {
+      suchkriterien.rating = this.rating; // 100 % number
     }
-
     if (this.art) {
       suchkriterien.art = this.art;
     }
 
     this.router.navigate(['/buecher'], { queryParams: suchkriterien });
 
-    this.buchservice.getBuecher(suchkriterien).subscribe((result) => {
-      this.buecher = result.data.buecher;
+    this.buchservice.getBuecher(suchkriterien).subscribe({
+      next: (result) => {
+        if (result?.data?.buecher) {
+          this.buecher = result.data.buecher;
+        } else {
+          console.warn('Keine Bücher gefunden oder leere Antwort:', result);
+          this.buecher = [];
+        }
+      },
+      error: (error) => {
+        console.error('Apollo Error:', error);
+      },
     });
   }
   geheZuAddSeite() {
-  this.router.navigate(['/add']);
-}
+    this.router.navigate(['/add']);
+  }
 }

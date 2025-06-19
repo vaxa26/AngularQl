@@ -28,6 +28,7 @@ export class BooksPageComponent implements OnInit {
 
   displayedColumns: string[] = [
     'id',
+    'isbn',
     'titel',
     'rating',
     'art',
@@ -39,13 +40,22 @@ export class BooksPageComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
-      this.buchservice.getBuecher(params).subscribe((result) => {
+      const suchkriterien: any = { ...params };
+
+      const ratingStr = params['rating'];
+      const parsedRating = parseInt(ratingStr, 10);
+
+      if (!isNaN(parsedRating)) {
+        suchkriterien.rating = parsedRating;
+      } else {
+        delete suchkriterien.rating;
+      }
+
+      this.buchservice.getBuecher(suchkriterien).subscribe((result) => {
         this.buecher = result.data.buecher;
       });
     });
-    this.isAdmin = this.keyclockservice.hasRole('admin');
   }
-
   homebutton() {
     this.router.navigate(['/home']);
   }
