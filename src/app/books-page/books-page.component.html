@@ -17,7 +17,11 @@
           <i class="fa-solid fa-minus"></i>
         </button>
       </td>
-      <td>{{ element.id }}</td>
+      <td>
+        <a [routerLink]="['/buecher', element.id]" class="buch-id">
+          {{ element.id }}
+        </a>
+      </td>
       <td>{{ element.isbn}}</td>
       <td>{{ element.titel?.titel }}</td>
       <td>

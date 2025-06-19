@@ -2,12 +2,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { BuchService } from '../service/buch.service';
 import { KeycloakService } from '../service/keycloack.service';
 @Component({
   selector: 'app-books-page',
-  imports: [CommonModule, MatTableModule],
+  imports: [CommonModule, MatTableModule, RouterModule],
   templateUrl: './books-page.component.html',
   styleUrl: './books-page.component.scss',
 })

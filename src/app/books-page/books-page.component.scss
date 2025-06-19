@@ -21,3 +21,14 @@
   margin-right: 8px;
   color: black;
 }
+
+.buch-id {
+  color: inherit; // normale Textfarbe
+  text-decoration: none; // keine Unterstreichung
+
+  &:hover {
+    color: #007bff; // Bootstrap-Blau oder Wunschfarbe
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
