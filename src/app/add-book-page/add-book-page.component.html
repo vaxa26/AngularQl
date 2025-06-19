@@ -1,11 +1,11 @@
 <div class="add-box">
-  <label>ISBN</label>
+  <label for="isbn">ISBN</label>
   <div class="ISBN-input">
     <input type="text" [(ngModel)]="isbnInput" (ngModelChange)="onIsbnChange($event)" placeholder="ISBN"
       class="form-control" maxlength="17" />
   </div>
   <div class="Titel">
-    <label>Titel</label>
+    <label for="Titel">Titel</label>
     <div class="titel-input">
       <input type="text" [(ngModel)]="isTitle" placeholder="Titel" class="form-control" />
       <input type="text" [(ngModel)]="isUntertitel" placeholder="Untertitel" class="form-control" />
@@ -69,7 +69,7 @@
 
   <!--HomePage-->
   <div class="mb-3">
-    <label class="form-label">Homepage</label>
+    <label class="form-label" for="Homepage">Homepage</label>
     <input type="text" class="form-control"
       [ngClass]="{ 'is-invalid': !isHomepageValid() && ishomepage !== 'https://' }" [(ngModel)]="ishomepage"
       name="homepage" />
@@ -80,7 +80,7 @@
 
   <!--Schlagwoerter-->
   <div class="mb-3">
-    <label class="form-label">Schlagwörter</label>
+    <label class="form-label" for="schlagwoerter">Schlagwörter</label>
     <div class="form-check d-flex flex-wrap gap-4">
       <div *ngFor="let wort of verfuegbareSchlagwoerter" class="form-check">
         <input class="form-check-input" type="checkbox" [id]="wort" [value]="wort"
@@ -90,7 +90,7 @@
     </div>
   </div>
   <div class="mb-2">
-    <label class="form-label">Abbildung</label>
+    <label class="form-label" for="Abbildung">Abbildung</label>
     <input type="text" class="form-control mb-1" placeholder="Beschriftung" [(ngModel)]="abbildungen[0].beschriftung"
       name="beschriftung0" />
     <input type="text" class="form-control" placeholder="Content-Type (z.B. image/png)"

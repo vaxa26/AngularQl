@@ -8,29 +8,34 @@
       <span class="input-group-text">
         <i class="fa-solid fa-magnifying-glass"></i>
       </span>
-      <input
-        type="text"
-        class="form-control"
-        [(ngModel)]="searchInput"
-        (keyup.enter)="search()"
-        placeholder="🔍 Suche nach ISBN oder Titel"
-      />
+      <input type="text" class="form-control" [(ngModel)]="searchInput" (keyup.enter)="search()"
+        placeholder="Suche nach ISBN oder Titel" />
     </div>
 
     <!-- ⭐ Bewertung -->
-    <div class="rating mb-3">
-      <label for="ratingRange" class="form-label fw-bold">⭐ Bewertung: {{ rating }}</label>
-      <input
-        type="range"
-        class="form-range"
-        id="ratingRange"
-        min="0"
-        max="5"
-        step="1"
-        [(ngModel)]="rating"
-      />
-    </div>
+    <div class="star-rating">
+      <span>Rating:</span>
+      <ngb-rating [(rate)]="rating!" [max]="5">
+        <ng-template let-fill="fill" let-index="index">
+          <i class="fa-star" [ngClass]="{
+                    'fa-solid': fill === 100,
+                    'fa-regular': fill !== 100,
+                    'filled': fill === 100,
+                  }">
+          </i>
+        </ng-template>
+      </ngb-rating>
 
+      <!--Lieferbar Checkbox abfrage-->
+      <div class="align-items-center justify-content-center gap-4 mt-">
+        <input class="form-check-input me-1" type="checkbox" id="flexCheckDefault" [(ngModel)]="lieferbarChecked"
+          (change)="onLieferbarChange()" />
+        <label class="form-check-label" for="flexCheckDefault">Lieferbar</label>
+        <input class="form-check-input me-1" type="checkbox" id="flexCheckDefault" [(ngModel)]="notlieferbarChecked"
+          (change)="onNichtLieferbarChange()" />
+        <label class="form-check-label" for="flexCheckDefault">Nicht lieferbar</label>
+      </div>
+    </div>
     <!-- 📘 Buch-Art Dropdown -->
     <div class="mb-3">
       <label for="buchArt" class="form-label fw-bold">📘 Buch-Art</label>
@@ -43,15 +48,15 @@
 
     <!-- 🟢 Suchen Button -->
     <button class="btn btn-primary w-100" (click)="search()">
-      🔍 Jetzt suchen
+      Jetzt suchen
     </button>
   </div>
 
   <!-- ➕ Neues Buch anlegen Button -->
   <div class="text-center mt-4">
-   <button class="btn btn-success" (click)="geheZuAddSeite()">
-  ➕ Neues Buch anlegen
-</button>
+    <button class="btn btn-success" (click)="geheZuAddSeite()">
+      Neues Buch anlegen
+    </button>
   </div>
 
 </div>
