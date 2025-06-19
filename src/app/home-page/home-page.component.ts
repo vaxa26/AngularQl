@@ -1,7 +1,9 @@
-import { NgForOf } from '@angular/common';
-import { Component } from '@angular/core';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { NgClass, NgForOf } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { BuchService } from '../service/buch.service';
 
 interface Art {
@@ -12,15 +14,17 @@ interface Art {
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [NgForOf, FormsModule],
+  imports: [NgForOf, FormsModule, NgbRatingModule, NgClass],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
-export class HomePageComponent {
+export class HomePageComponent implements OnInit {
   searchInput = '';
   buecher: any[] = [];
   rating: number | null = null;
   art = '';
+  lieferbarChecked = false;
+  notlieferbarChecked = false;
 
   constructor(
     private buchservice: BuchService,
@@ -37,8 +41,19 @@ export class HomePageComponent {
       this.rating = Number.isInteger(ratingNum) ? ratingNum : null;
       this.searchInput = params['titel'] || '';
       this.art = params['art'] || '';
-
-      if (this.searchInput || this.rating !== null || this.art) {
+      const lieferbarParam = params['lieferbar'];
+      if (lieferbarParam === 'true') {
+        this.lieferbarChecked = true;
+      } else if (lieferbarParam === 'false') {
+        this.notlieferbarChecked = true;
+      }
+      if (
+        this.searchInput ||
+        this.rating !== null ||
+        this.art ||
+        this.lieferbarChecked ||
+        this.notlieferbarChecked
+      ) {
         this.search();
       }
     });
@@ -51,28 +66,53 @@ export class HomePageComponent {
     { value: 'HARDCOVER', viewValue: 'Hardcover' },
   ];
 
+  onLieferbarChange() {
+    if (this.lieferbarChecked) {
+      this.notlieferbarChecked = false;
+    }
+  }
+
+  onNichtLieferbarChange() {
+    if (this.notlieferbarChecked) {
+      this.lieferbarChecked = false;
+    }
+  }
+
   search() {
     const input = this.searchInput.trim();
     const isIsbn = /^(\d{3}-\d{1,5}-\d{1,7}-\d{1,7}-[\dXx])$/.test(input);
 
     const suchkriterien: any = {};
+    const queryParams: any = {};
 
     if (input) {
       if (isIsbn) {
         suchkriterien.isbn = input;
+        queryParams.isbn = input;
       } else {
         suchkriterien.titel = input;
+        queryParams.titel = input;
       }
     }
 
     if (typeof this.rating === 'number' && !isNaN(this.rating)) {
-      suchkriterien.rating = this.rating; // 100 % number
+      suchkriterien.rating = this.rating;
+      queryParams.rating = this.rating;
     }
     if (this.art) {
       suchkriterien.art = this.art;
+      queryParams.art = this.art;
     }
 
-    this.router.navigate(['/buecher'], { queryParams: suchkriterien });
+    if (this.lieferbarChecked) {
+      suchkriterien.lieferbar = true;
+      queryParams.lieferbar = 'true';
+    } else if (this.notlieferbarChecked) {
+      suchkriterien.lieferbar = false;
+      queryParams.lieferbar = 'false';
+    }
+
+    this.router.navigate(['/buecher'], { queryParams });
 
     this.buchservice.getBuecher(suchkriterien).subscribe({
       next: (result) => {

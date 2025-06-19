@@ -34,11 +34,22 @@ mat-slider {
   width: 100%;
 }
 
-.stars mat-icon {
-  cursor: pointer;
-  font-size: 30px;
-  color: gold;
-}
-.rating .selected {
-  color: gold;
+.star-rating {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+
+  i {
+    font-size: 1.5rem;
+    padding-right: 0.1rem;
+    color: #ffa600; // Default-Sternfarbe (z. B. grau/blau)
+  }
+
+  .filled {
+    color: #ffa600; // Gefüllter Stern (Blau)
+  }
+
+  .filled.low {
+    color: #ffa600; // Gefüllter Stern bei niedriger Bewertung (Rot)
+  }
 }

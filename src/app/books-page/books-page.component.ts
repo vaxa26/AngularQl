@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
@@ -40,7 +41,7 @@ export class BooksPageComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
-      const suchkriterien: any = { ...params };
+      const suchkriterien: any = {};
 
       const ratingStr = params['rating'];
       const parsedRating = parseInt(ratingStr, 10);
@@ -49,6 +50,16 @@ export class BooksPageComponent implements OnInit {
         suchkriterien.rating = parsedRating;
       } else {
         delete suchkriterien.rating;
+      }
+
+      if (params['lieferbar'] === 'true') {
+        suchkriterien.lieferbar = true;
+      } else if (params['lieferbar'] === 'false') {
+        suchkriterien.lieferbar = false;
+      }
+
+      if (params['art']) {
+        suchkriterien.art = params['art'];
       }
 
       this.buchservice.getBuecher(suchkriterien).subscribe((result) => {
@@ -72,6 +83,7 @@ export class BooksPageComponent implements OnInit {
       },
     });
   }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   bearbeiten(_t17: any) {
     throw new Error('Method not implemented.');
   }
