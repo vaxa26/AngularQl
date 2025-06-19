@@ -18,11 +18,11 @@ import { KeycloakService } from '../service/keycloack.service';
 })
 export class LoginPopupComponent {
   showLoginPopup = true;
-  username: string = '';
-  password: string = '';
+  username = '';
+  password = '';
   error: string | null = null;
   authService: any;
-  isAdmin: boolean = false;
+  isAdmin = false;
 
   constructor(
     private keycloakService: KeycloakService,

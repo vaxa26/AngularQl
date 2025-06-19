@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component, TemplateRef } from '@angular/core';
+import { Component, TemplateRef, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, RouterModule } from '@angular/router';
@@ -19,9 +19,9 @@ interface Art {
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
-  isAdmin: boolean = false;
-  menuOpen: boolean = false;
+export class AppComponent implements OnInit {
+  isAdmin = false;
+  menuOpen = false;
 
   constructor(
     private dialog: MatDialog,

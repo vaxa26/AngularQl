@@ -20,7 +20,7 @@ export class HomePageComponent {
   searchInput = '';
   buecher: any[] = [];
   rating: number | null = null;
-  art: string = '';
+  art = '';
 
   constructor(
     private buchservice: BuchService,

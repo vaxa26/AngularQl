@@ -39,9 +39,9 @@ export class AddBookPageComponent {
   }
   isPrice: number | null = null;
   isSale: number | null = null;
-  lieferbar: boolean = false;
+  lieferbar = false;
   model?: NgbDateStruct;
-  tagInput: string = '';
+  tagInput = '';
   ishomepage = '';
   schlagwoerter: string[] = [];
   abbildungen: { beschriftung: string; contentType: string }[] = [
