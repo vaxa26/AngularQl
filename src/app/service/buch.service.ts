@@ -8,6 +8,31 @@ import { Apollo, gql } from 'apollo-angular';
 export class BuchService {
   constructor(private apollo: Apollo) {}
 
+  getBuchById(id: string) {
+    return this.apollo.query<{ buch: any }>({
+      query: gql`
+        query ($id: ID!) {
+          buch(id: $id) {
+            id
+            isbn
+            titel {
+              titel
+              untertitel
+            }
+            rating
+            art
+            preis
+            rabatt
+            lieferbar
+            datum
+            homepage
+          }
+        }
+      `,
+      variables: { id },
+    });
+  }
+
   getBuecher(suchkriterien: any) {
     return this.apollo.watchQuery<{ buecher: any[] }>({
       query: gql`

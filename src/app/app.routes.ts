@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddBookPageComponent } from './add-book-page/add-book-page.component';
+import { BuchDetailsComponent } from './book-detail/book-detail.component';
 import { BooksPageComponent } from './books-page/books-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 
@@ -9,6 +10,7 @@ export const routes: Routes = [
   { path: 'home', component: HomePageComponent },
   { path: 'buecher', component: BooksPageComponent },
   { path: 'add', component: AddBookPageComponent },
+  { path: 'buecher/:id', component: BuchDetailsComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 

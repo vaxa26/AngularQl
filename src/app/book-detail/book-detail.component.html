@@ -1,0 +1,16 @@
+<div *ngIf="buch; else loading">
+  <h2>{{ buch.titel?.titel }} (ID: {{ buch.id }})</h2>
+  <p><strong>ISBN:</strong> {{ buch.isbn }}</p>
+  <p><strong>Untertitel:</strong> {{ buch.titel?.untertitel }}</p>
+  <p><strong>Rating:</strong> {{ buch.rating }}</p>
+  <p><strong>Art:</strong> {{ buch.art }}</p>
+  <p><strong>Preis:</strong> {{ buch.preis | currency:'EUR' }}</p>
+  <p><strong>Lieferbar:</strong> {{ buch.lieferbar ? 'Ja' : 'Nein' }}</p>
+  <p><strong>Datum:</strong> {{ buch.datum | date:'dd.MM.yyyy' }}</p>
+  <p><strong>Homepage:</strong> <a [href]="buch.homepage" target="_blank">{{ buch.homepage }}</a></p>
+  <!-- ggf. Abbildungen, Schlagwörter, ... -->
+</div>
+
+<ng-template #loading>
+  <p>Lade Buchdetails...</p>
+</ng-template>
