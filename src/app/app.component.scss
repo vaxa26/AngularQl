@@ -7,8 +7,9 @@
 }
 
 .header {
-  width: 100%;
+  position: relative;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
 
@@ -24,6 +25,7 @@
     width: 50%;
     display: block;
     margin: auto;
+    align-items: center;
   }
   .menu-icon {
     font-size: 2rem;

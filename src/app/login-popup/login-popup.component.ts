@@ -18,7 +18,7 @@ import { KeycloakService } from '../service/keycloack.service';
 })
 export class LoginPopupComponent {
   showLoginPopup = true;
-  username: string = '';
+  username = '';
   password: string = '';
   error: string | null = null;
   authService: any;

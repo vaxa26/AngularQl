@@ -1,11 +1,15 @@
 <div class="add-box">
+  <label>ISBN</label>
   <div class="ISBN-input">
-    <label> ISBN </label>
-    <input type="text" [(ngModel)]="isbnInput" placeholder="ISBN" class="form-control" />
+    <input type="text" [(ngModel)]="isbnInput" (ngModelChange)="onIsbnChange($event)" placeholder="ISBN"
+      class="form-control" maxlength="17" />
   </div>
-  <div class="titel-input">
-    <input type="text" [(ngModel)]="isTitle" placeholder="Titel" class="form-control" />
-    <input type="text" [(ngModel)]="isUntertitel" placeholder="Untertitel" class="form-control" />
+  <div class="Titel">
+    <label>Titel</label>
+    <div class="titel-input">
+      <input type="text" [(ngModel)]="isTitle" placeholder="Titel" class="form-control" />
+      <input type="text" [(ngModel)]="isUntertitel" placeholder="Untertitel" class="form-control" />
+    </div>
   </div>
   <!-- Rating -->
   <div class="star-rating">
@@ -63,26 +67,28 @@
     </div>
   </div>
 
-  <div class="homepage-input">
-    <label> URL </label>
-    <input type="text" [(ngModel)]="ishomepage" placeholder="Homepage hinzufügen" class="form-control" />
-  </div>
-
-  <!--Schlagwoerter-->
-  <div class="schlagwoerter">
-    <label for="tagInput" class="form-label">Schlagwörter</label>
-    <input type="text" id="tagInput" class="form-control" placeholder="Mit Enter hinzufügen" [(ngModel)]="tagInput"
-      (keydown.enter)="addTag()" />
-
-    <!-- Zeige vorhandene Tags als "Chips" -->
-    <div class="mt-2">
-      <span class="badge bg-primary me-1" *ngFor="let tag of schlagwoerter; let i = index">
-        {{ tag }}
-        <button type="button" class="btn-close btn-close-white btn-sm ms-1" (click)="removeTag(i)"></button>
-      </span>
+  <!--HomePage-->
+  <div class="mb-3">
+    <label class="form-label">Homepage</label>
+    <input type="text" class="form-control"
+      [ngClass]="{ 'is-invalid': !isHomepageValid() && ishomepage !== 'https://' }" [(ngModel)]="ishomepage"
+      name="homepage" />
+    <div *ngIf="!isHomepageValid() && ishomepage !== 'https://'" class="text-danger mt-1">
+      Ungültige Homepage
     </div>
   </div>
 
+  <!--Schlagwoerter-->
+  <div class="mb-3">
+    <label class="form-label">Schlagwörter</label>
+    <div class="form-check d-flex flex-wrap gap-4">
+      <div *ngFor="let wort of verfuegbareSchlagwoerter" class="form-check">
+        <input class="form-check-input" type="checkbox" [id]="wort" [value]="wort"
+          [checked]="schlagwoerter.includes(wort)" (change)="toggleSchlagwort(wort, $event)" />
+        <label class="form-check-label" [for]="wort">{{ wort }}</label>
+      </div>
+    </div>
+  </div>
   <div class="mb-2">
     <label class="form-label">Abbildung</label>
     <input type="text" class="form-control mb-1" placeholder="Beschriftung" [(ngModel)]="abbildungen[0].beschriftung"
