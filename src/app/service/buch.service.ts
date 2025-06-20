@@ -26,6 +26,7 @@ export class BuchService {
             lieferbar
             datum
             homepage
+            schlagwoerter
           }
         }
       `,
