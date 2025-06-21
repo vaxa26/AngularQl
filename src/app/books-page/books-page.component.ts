@@ -58,12 +58,23 @@ export class BooksPageComponent implements OnInit {
         suchkriterien.art = params['art'];
       }
 
+      if (params['isbn']) {
+        suchkriterien.isbn = params['isbn'];
+      }
+
+      if (params['titel']) {
+        suchkriterien.titel = params['titel'];
+      }
+
+      console.log('Suchkriterien an GraphQL:', suchkriterien);
+
       this.buchservice.getBuecher(suchkriterien).subscribe((result) => {
         this.buecher = result.data.buecher;
       });
     });
     this.isAdmin = this.keyclockservice.hasRole('admin');
   }
+
   homebutton() {
     this.router.navigate(['/home']);
   }
