@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { NgClass, NgForOf } from '@angular/common';
+import { NgClass, NgForOf, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -14,7 +14,7 @@ interface Art {
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [NgForOf, FormsModule, NgbRatingModule, NgClass],
+  imports: [NgForOf, FormsModule, NgbRatingModule, NgClass, NgIf],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
@@ -25,6 +25,8 @@ export class HomePageComponent implements OnInit {
   art = '';
   lieferbarChecked = false;
   notlieferbarChecked = false;
+  buchId = '';
+  isAdmin = false;
 
   constructor(
     private buchservice: BuchService,
@@ -65,7 +67,6 @@ export class HomePageComponent implements OnInit {
     { value: 'PAPERBACK', viewValue: 'Paperback' },
     { value: 'HARDCOVER', viewValue: 'Hardcover' },
   ];
-
   onLieferbarChange() {
     if (this.lieferbarChecked) {
       this.notlieferbarChecked = false;
@@ -75,6 +76,12 @@ export class HomePageComponent implements OnInit {
   onNichtLieferbarChange() {
     if (this.notlieferbarChecked) {
       this.lieferbarChecked = false;
+    }
+  }
+  searchid() {
+    const id = this.buchId.trim();
+    if (id) {
+      this.router.navigate(['//buecher', id]);
     }
   }
 

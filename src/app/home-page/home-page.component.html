@@ -1,12 +1,26 @@
-<div class="container mt-5">
+<div class="container mt-4">
 
   <h2 class="text-center mb-4">📚 Willkommen in der BuchApp</h2>
 
   <!-- 🔎 Suchleiste -->
-  <div class="search-box p-4 bg-light rounded shadow-sm mb-4">
-    <div class="search-field input-group mb-3">
+  <div class="search-box p-2 bg-light rounded shadow-sm">
+    <div class="search-field p-1 input-group">
       <span class="input-group-text">
-        <i class="fa-solid fa-magnifying-glass"></i>
+        <i class="fa-solid fa-magnifying-glass p-1"></i>
+      </span>
+      <input type="text" class="form-control" [(ngModel)]="buchId" (keyup.enter)="searchid()"
+        placeholder="Suche nach ID" />
+      <button class="btn btn-primary" (click)="searchid()">
+        Suchen
+      </button>
+    </div>
+
+  </div>
+  <hr>
+  <div class="search-box p-3 bg-light rounded shadow-sm mb-4">
+    <div class="search-field input-group mb-2">
+      <span class="input-group-text">
+        <i class="fa-solid fa-magnifying-glass p-1"></i>
       </span>
       <input type="text" class="form-control" [(ngModel)]="searchInput" (keyup.enter)="search()"
         placeholder="Suche nach ISBN oder Titel" />
@@ -27,7 +41,7 @@
       </ngb-rating>
 
       <!--Lieferbar Checkbox abfrage-->
-      <div class="align-items-center justify-content-center gap-4 mt-">
+      <div class="align-items-center justify-content-center gap-3 mt-1">
         <input class="form-check-input me-1" type="checkbox" id="flexCheckDefault" [(ngModel)]="lieferbarChecked"
           (change)="onLieferbarChange()" />
         <label class="form-check-label" for="flexCheckDefault">Lieferbar</label>
@@ -54,7 +68,7 @@
 
   <!-- ➕ Neues Buch anlegen Button -->
   <div class="text-center mt-4">
-    <button class="btn btn-success" (click)="geheZuAddSeite()">
+    <button *ngIf="isAdmin" class="btn btn-success" (click)="geheZuAddSeite()">
       Neues Buch anlegen
     </button>
   </div>
