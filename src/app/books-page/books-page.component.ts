@@ -13,7 +13,6 @@ import { KeycloakService } from '../service/keycloack.service';
 })
 export class BooksPageComponent implements OnInit {
   isAdmin = false;
-
   buecher: any[] = [];
 
   constructor(

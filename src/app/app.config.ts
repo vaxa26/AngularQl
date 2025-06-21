@@ -39,8 +39,10 @@ export const appConfig: ApplicationConfig = {
     provideApollo(() => {
       const httpLink = inject(HttpLink);
       const authLink = new ApolloLink((operation, forward) => {
-        const token = localStorage.getItem('access_token');
-
+        const token =
+          typeof window !== 'undefined'
+            ? localStorage.getItem('access_token')
+            : null;
         operation.setContext(({ headers = {} }) => ({
           headers: {
             ...headers,

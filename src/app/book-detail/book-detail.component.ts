@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BuchService } from '../service/buch.service';
@@ -7,8 +7,9 @@ import { BuchService } from '../service/buch.service';
 @Component({
   selector: 'app-buch-details',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgFor],
   templateUrl: './book-detail.component.html',
+  styleUrl: './book-detail.component.scss',
 })
 export class BuchDetailsComponent implements OnInit {
   buch: any;

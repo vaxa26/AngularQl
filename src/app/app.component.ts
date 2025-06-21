@@ -1,16 +1,11 @@
 import { NgIf } from '@angular/common';
-import { Component, TemplateRef, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, RouterModule } from '@angular/router';
 import { NgbOffcanvas, NgbOffcanvasConfig } from '@ng-bootstrap/ng-bootstrap';
 import { LoginPopupComponent } from './login-popup/login-popup.component';
 import { KeycloakService } from './service/keycloack.service';
-
-interface Art {
-  value: string;
-  viewValue: string;
-}
 
 @Component({
   selector: 'app-root',
@@ -71,7 +66,7 @@ export class AppComponent implements OnInit {
     window.location.reload();
   }
 
-  open(content: TemplateRef<any>) {
+  open(content: TemplateRef<unknown>) {
     this.offcanvasService.open(content);
   }
 
