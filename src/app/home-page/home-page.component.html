@@ -8,13 +8,13 @@
       <span class="input-group-text">
         <i class="fa-solid fa-magnifying-glass p-1"></i>
       </span>
-      <input type="text" class="form-control" [(ngModel)]="buchId" (keyup.enter)="searchid()"
+      <input type="text" class="form-control" [(ngModel)]="buchId" (keyup.enter)="searchId()"
         placeholder="Suche nach ID" />
-      <button class="btn btn-primary" (click)="searchid()">
+      <button class="btn btn-primary" (click)="searchId()">
         Suchen
       </button>
     </div>
-
+    <p *ngIf="errorMsgId" class="error-msg justify-content-center">{{ errorMsgId }}</p>
   </div>
   <hr>
   <div class="search-box p-3 bg-light rounded shadow-sm mb-4">
@@ -64,6 +64,7 @@
     <button class="btn btn-primary w-100" (click)="search()">
       Jetzt suchen
     </button>
+    <p *ngIf="errorMsgSearch" class="error-msg">{{ errorMsgSearch }}</p>
   </div>
 
   <!-- ➕ Neues Buch anlegen Button -->

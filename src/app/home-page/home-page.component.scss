@@ -53,3 +53,9 @@ mat-slider {
     color: #ffa600; // Gefüllter Stern bei niedriger Bewertung (Rot)
   }
 }
+.error-msg {
+  margin-top: 1rem; /* Abstand zum Suchfeld */
+  color: red; /* Signalfarbe */
+  font-weight: bold;
+  text-align: center; /* horizontal zentrieren */
+}
