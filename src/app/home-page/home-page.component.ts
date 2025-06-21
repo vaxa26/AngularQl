@@ -105,8 +105,9 @@ export class HomePageComponent implements OnInit {
     const isIsbn = /^(\d{3}-\d{1,5}-\d{1,7}-\d{1,7}-[\dXx])$/.test(input);
     const suchkriterien: any = {};
     const queryParams: any = {};
-
     this.errorMsgSearch = ';';
+
+    let direktsuche = false;
 
     if (input) {
       if (isIsbn) {
@@ -116,41 +117,44 @@ export class HomePageComponent implements OnInit {
         suchkriterien.titel = input;
         queryParams.titel = input;
       }
+      direktsuche = true; // 👈 hier wird direktsuche korrekt gesetzt
     }
 
-    if (typeof this.rating === 'number' && !isNaN(this.rating)) {
-      suchkriterien.rating = this.rating;
-      queryParams.rating = this.rating;
-    }
-    if (this.art) {
-      suchkriterien.art = this.art;
-      queryParams.art = this.art;
-    }
-
-    if (this.lieferbarChecked) {
-      suchkriterien.lieferbar = true;
-      queryParams.lieferbar = 'true';
-    } else if (this.notlieferbarChecked) {
-      suchkriterien.lieferbar = false;
-      queryParams.lieferbar = 'false';
+    if (!direktsuche) {
+      if (typeof this.rating === 'number' && !isNaN(this.rating)) {
+        suchkriterien.rating = this.rating;
+        queryParams.rating = this.rating;
+      }
+      if (this.art) {
+        suchkriterien.art = this.art;
+        queryParams.art = this.art;
+      }
+      if (this.lieferbarChecked) {
+        suchkriterien.lieferbar = true;
+        queryParams.lieferbar = 'true';
+      } else if (this.notlieferbarChecked) {
+        suchkriterien.lieferbar = false;
+        queryParams.lieferbar = 'false';
+      }
     }
 
     this.buchservice.getBuecher(suchkriterien).subscribe({
       next: (result) => {
-        const buecher = result?.data?.buecher ?? [];
+        let buecher = result?.data?.buecher ?? [];
+
+        if (!direktsuche && typeof this.rating === 'number') {
+          buecher = buecher.filter((b) => b.rating === this.rating);
+        }
+
         this.buecher = buecher;
 
-        if (buecher.length === 0) {
-          this.errorMsgSearch = '❗ Keine Bücher gefunden.';
-        } else {
-          this.errorMsgSearch = '';
-          this.router.navigate(['/buecher'], { queryParams }); // ✅ Nur wenn Treffer
-        }
+        this.errorMsgSearch = '';
+        this.router.navigate(['/buecher'], { queryParams });
       },
       error: (error) => {
         console.error('Apollo Error:', error);
         this.buecher = [];
-        this.errorMsgSearch = '❗ Fehler beim Laden der Bücher.';
+        this.errorMsgSearch = 'Keine Bücher gefunden.';
       },
     });
   }
