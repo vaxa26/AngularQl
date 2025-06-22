@@ -3,17 +3,20 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
 import { BuchService } from '../service/buch.service';
 import { KeycloakService } from '../service/keycloack.service';
 @Component({
   selector: 'app-books-page',
-  imports: [CommonModule, MatTableModule, RouterModule],
+  imports: [CommonModule, MatTableModule, RouterModule, NgbPagination],
   templateUrl: './books-page.component.html',
   styleUrl: './books-page.component.scss',
 })
 export class BooksPageComponent implements OnInit {
   isAdmin = false;
   buecher: any[] = [];
+  currentPage = 1;
+  pageSize = 5;
 
   constructor(
     private route: ActivatedRoute,
@@ -75,6 +78,11 @@ export class BooksPageComponent implements OnInit {
     this.isAdmin = this.keyclockservice.hasRole('admin');
   }
 
+  getPagedBuecher(): any[] {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    return this.buecher.slice(startIndex, startIndex + this.pageSize);
+  }
+
   homebutton() {
     this.router.navigate(['/home']);
   }
@@ -90,9 +98,5 @@ export class BooksPageComponent implements OnInit {
         console.error('fehler beim löschen', err);
       },
     });
-  }
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  bearbeiten(_t17: any) {
-    throw new Error('Method not implemented.');
   }
 }

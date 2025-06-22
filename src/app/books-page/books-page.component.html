@@ -33,6 +33,11 @@
   </tbody>
 </table>
 
+<ngb-pagination class="d-flex justify-content-center" [collectionSize]="buecher.length" [(page)]="currentPage"
+  [pageSize]="pageSize" [maxSize]="5" [boundaryLinks]="true" [directionLinks]="true">
+</ngb-pagination>
+
+
 <div class="home-button-container mt-3">
   <button class="btn btn-primary home-button" (click)="homebutton()">
     <i class="fa-solid fa-home homeicon"></i>
