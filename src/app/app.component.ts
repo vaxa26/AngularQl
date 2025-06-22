@@ -63,7 +63,8 @@ export class AppComponent implements OnInit {
       localStorage.removeItem('access_token');
     }
     this.isAdmin = false;
-    window.location.reload();
+    this.offcanvasService?.dismiss();
+    this.router.navigate(['/home']);
   }
 
   open(content: TemplateRef<unknown>) {
