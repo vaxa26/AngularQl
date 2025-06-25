@@ -21,7 +21,7 @@ export class LoginPopupComponent {
   username = '';
   password = '';
   error: string | null = null;
-  authService: any;
+  authService: unknown;
   isAdmin = false;
 
   constructor(
