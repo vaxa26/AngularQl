@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -58,7 +59,7 @@ export class KeycloakService {
     const realmRoles = payload?.realm_access?.roles || [];
     if (realmRoles.includes(role)) return true;
 
-    // 2. Prüfe Client-Rollen (z. B. "nest-client")
+    // 2. Prüfe Client-Rollen (z.B. "nest-client")
     const clientRoles = payload?.resource_access?.['nest-client']?.roles || [];
     return clientRoles.includes(role);
   }

@@ -5,10 +5,11 @@
       class="form-control" maxlength="17" />
   </div>
   <div class="Titel">
-    <label for="Titel">Titel</label>
     <div class="titel-input">
-      <input type="text" [(ngModel)]="isTitle" placeholder="Titel" class="form-control" />
-      <input type="text" [(ngModel)]="isUntertitel" placeholder="Untertitel" class="form-control" />
+      <label for="titel">Titel</label>
+      <input type="text" [(ngModel)]="isTitle" placeholder="Titel" class="form-control" id="titel" />
+      <label for="untertitel">Untertitel</label>
+      <input id="untertitel" type="text" [(ngModel)]="isUntertitel" placeholder="Untertitel" class="form-control" />
     </div>
   </div>
   <!-- Rating -->
